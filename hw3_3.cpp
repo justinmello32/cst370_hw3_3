@@ -1,41 +1,37 @@
+/*
+ * Title: hw2_2.cpp
+ * Abstract: This program implements the Depth-First Search (DFS) 
+             algorithm using a stack and a mark array.
+ * Author: Justin Mello
+ * ID: 2002
+ * Date: 03/23/2021
+*/
 #include <iostream>
 #include <vector>
-
 
 using namespace std;
 
 //Global counter
 int counter = 0;
 
-void dfs(int index, vector<int> & countArray, vector<vector<int>> & graph) {
+void depthRecursion(int index, vector<int> & countArray, vector<vector<int>> & graph) {
     
+    int empty = 0;
     countArray[index] = ++counter;
     
     for(int i = 0; i < graph[index].size(); i++) {
         int result = graph[index][i];
         
-        if(countArray[result] == 0)
-            dfs(result, countArray, graph);
+        if(countArray[result] == empty)
+            depthRecursion(result, countArray, graph);
         }
 }
-
-void dfs(vector<vector<int>> & graph) {
-    
-    int start = 0;
-    vector <int> mark(graph.size(), start);
-    
-    dfs(start, mark, graph);
-    
-    for (int i = 0; i < graph.size(); i++){
-		cout << "Mark[" << i << "]: " << mark[i] << endl;
-	}
-}
-
 
 int main()
 {
     
     //Inital variables
+    int initial = 0;
     int vertices;
     int numOfEdges;
     int vertFrom;
@@ -57,7 +53,13 @@ int main()
     }
     
     //Search and Display
-    dfs(graph);
+    vector <int> mark(graph.size(), initial);
+    depthRecursion(initial, mark, graph);
+    
+    //Loop to display results
+    for (int i = 0; i < graph.size(); i++){
+		cout << "Mark[" << i << "]: " << mark[i] << endl;
+	}
     
     
     return 0;
