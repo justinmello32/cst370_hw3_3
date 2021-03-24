@@ -1,5 +1,5 @@
 /*
- * Title: hw2_2.cpp
+ * Title: hw3_3.cpp
  * Abstract: This program implements the Depth-First Search (DFS) 
              algorithm using a stack and a mark array.
  * Author: Justin Mello
@@ -27,6 +27,12 @@ void depthRecursion(int index, vector<int> & countArray, vector<vector<int>> & g
         }
 }
 
+void displayResults(vector<int> markVector, vector<vector<int>> vector) {
+        for (int i = 0; i < vector.size(); i++){
+		cout << "Mark[" << i << "]: " << markVector[i] << endl;
+	}
+}
+
 int main()
 {
     
@@ -52,15 +58,12 @@ int main()
         graph[vertFrom].push_back(vertTo);
     }
     
-    //Search and Display
+    //Pass to search
     vector <int> mark(graph.size(), initial);
     depthRecursion(initial, mark, graph);
     
-    //Loop to display results
-    for (int i = 0; i < graph.size(); i++){
-		cout << "Mark[" << i << "]: " << mark[i] << endl;
-	}
-    
+    //Display results, pass/graph vector.
+    displayResults(mark, graph);
     
     return 0;
 }
